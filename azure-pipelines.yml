@@ -13,6 +13,19 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+
+- task: DockerCompose@0
+  inputs:
+    containerregistrytype: 'Azure Container Registry'
+    azureSubscription: 'Free Trial(2)(e4f39a01-a049-4022-9795-f405be582b20)'
+    azureContainerRegistry: '{"loginServer":"testeazureacr.azurecr.io", "id" : "/subscriptions/e4f39a01-a049-4022-9795-f405be582b20/resourceGroups/TesteAzure-rg/providers/Microsoft.ContainerRegistry/registries/TesteAzureacr"}'
+    dockerComposeFile: '**/docker-compose.yml'
+    action: 'Run a Docker Compose command'
+    dockerComposeCommand: 'Run'
+
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
