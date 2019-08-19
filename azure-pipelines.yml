@@ -17,9 +17,11 @@ steps:
   inputs:
     command: 'build'
 
-- task: DockerInstaller@0
+- task: NuGetCommand@2
   inputs:
-    dockerVersion: '17.09.0-ce'
+    command: 'restore'
+    restoreSolution: '**/*.sln'
+    feedsToUse: 'select'
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
